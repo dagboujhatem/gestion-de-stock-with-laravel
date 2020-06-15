@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Category;
+use App\Product;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
 
-class CategoryDataTable extends DataTable
+class ProductDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,26 +18,31 @@ class CategoryDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
-        // status
-        $dataTable->editColumn('status', function ($category)
+        // image
+        $dataTable->editColumn('image', function ($product)
         {
-            if($category->status == 'Activated')
+            $image_url = $product->image;
+            return '<img src="{{ $image_url }}" width="20" height="20">';
+        });
+        // availability
+        $dataTable->editColumn('availability', function ($product)
+        {
+            if($product->qte > 10)
                 return "<span class='badge badge-success'>Success</span>";
             else
                 return "<span class='badge badge-danger'>Danger</span>";
         });
 
-        return $dataTable->addColumn('action', 'categories.datatables_actions');
+        return $dataTable->addColumn('action', 'products.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\Product $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Category $model)
+    public function query(Product $model)
     {
         return $model->newQuery();
     }
@@ -98,8 +103,11 @@ class CategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name' => new Column(['title' => __('models/categories.fields.name'), 'data' => 'name']),
-            'status' => new Column(['title' => __('models/categories.fields.status'), 'data' => 'status'])
+            'image' => new Column(['title' => __('models/products.fields.image'), 'data' => 'image']),
+            'product_name' => new Column(['title' => __('models/products.fields.product_name'), 'data' => 'product_name']),
+            'price' => new Column(['title' => __('models/products.fields.price'), 'data' => 'price']),
+            'qte' => new Column(['title' => __('models/products.fields.qte'), 'data' => 'qte']),
+            'availability' => new Column(['title' => __('models/products.fields.availability'), 'data' => 'availability'])
         ];
     }
 
