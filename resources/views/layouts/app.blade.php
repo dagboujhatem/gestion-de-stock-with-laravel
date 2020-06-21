@@ -63,19 +63,22 @@
                                     <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
                                          class="img-circle" alt="User Image"/>
                                     <p>
-                                        {{ Auth::user()->name }}
-                                        <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+                                        {{ Auth::user()->full_name }}
+                                        <small>@lang('common_menu.member_sinse') {{ Auth::user()->created_at->format('M. Y') }}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-default btn-flat">
+                                            <i class="fa fa-cogs"></i>
+                                            @lang('common_menu.profile_settings')
+                                        </a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Sign out
+                                            <i class="fa fa-sign-out"></i> @lang('common_menu.log_out')
                                         </a>
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             @csrf
