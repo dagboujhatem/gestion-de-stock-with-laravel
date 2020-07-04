@@ -70,7 +70,8 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">
+                                        <a href="{!! route('profile.edit', Auth::user()->id) !!}"
+                                            class="btn btn-default btn-flat">
                                             <i class="fa fa-cogs"></i>
                                             @lang('common_menu.profile_settings')
                                         </a>

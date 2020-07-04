@@ -20,13 +20,13 @@ class UserTableSeeder extends Seeder
                  "full_name" => "Dagbouj Hatem",
                  "email" => "dagboujhatem@gmail.com",
                  "password" => bcrypt("password")
-             ]);
+             ])->assignRole('Administrator');
 
              User::create([
-                 "full_name" => "Admin Admin",
-                 "email" => "admin@gmail.com",
+                 "full_name" => "User User",
+                 "email" => "user@gmail.com",
                  "password" => bcrypt("password")
-             ]);
+             ])->assignRole('User');
          }
          else
          {

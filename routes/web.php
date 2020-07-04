@@ -17,28 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->middleware('verified');
-
-
-
-
-
-
+Route::get('/home', 'HomeController@index')
+    ->name('home')
+    ->middleware('verified');
 
 Route::resource('categories', 'CategoryController');
 
-
-
-
-
 Route::resource('users', 'UserController')->middleware('auth');
 
-
 Route::resource('products', 'ProductController');
+
+Route::resource('profile', 'ProfileSettingsController',
+    ['only' => ['edit', 'update']]);
+
+Route::resource('application', 'ApplicationSettingsController',
+    ['only' => ['index', 'store']]);

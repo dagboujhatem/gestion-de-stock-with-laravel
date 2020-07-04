@@ -3,7 +3,12 @@
     {!! Form::label('image', __('models/products.fields.image').':') !!}
     {!! Form::file('image') !!}
 </div>
-<div class="clearfix"></div>
+
+<!-- Category Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('status', __('models/categories.singular').':') !!}
+    {!! Form::select('status', [], null, ['class' => 'form-control']) !!}
+</div>
 
 <!-- Product Name Field -->
 <div class="form-group col-sm-6">
